@@ -1,8 +1,5 @@
 require 'socket'
 
-def parse_query(query_string)
-end
-
 def parse_request(request_string)
   httpd_method, path_and_query, _ = request_string.split ' ', 3
   path, query_params = path_and_query.split '?', 2
