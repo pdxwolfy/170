@@ -1,0 +1,1 @@
+A request that is simply retrieving data from the server should use GET. A request that is updating data on the server should use POST.

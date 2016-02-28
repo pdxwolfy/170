@@ -1,0 +1,2 @@
+Required: Status, ContentType
+Optional: Headers, Body

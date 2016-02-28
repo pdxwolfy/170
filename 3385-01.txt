@@ -1,0 +1,2 @@
+Required: Method, Path
+Optional: Parameters, Headers, Body

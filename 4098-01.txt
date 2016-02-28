@@ -1,0 +1,11 @@
+https://amazon.com/Double-Stainless-Commercial-Refrigerator/B60HON32?ie=UTF8&qid=142952676&sr=93&keywords=commercial+fridge
+
+a. amazon.com
+b. ie,qid,sr,keywords
+c. ie=UTF8
+   qid=142952676
+   sr=93
+   keywords=commercial+fridge (commercial fridge)
+d. https
+e. /Double-Stainless-Commercial-Refrigerator/B60HON32
+f. 443
