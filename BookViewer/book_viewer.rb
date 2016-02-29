@@ -3,9 +3,22 @@ require 'sinatra/reloader'
 require 'tilt/erubis'
 
 TABLE_OF_CONTENTS = 'data/toc.txt'
+CHAPTER_TEXT = 'data/chp%{chapter_number}.txt'
 
-get '/' do
+def initialize_common_variables
   @title = 'The Adventures of Sherlock Holmes'
   @contents = File.readlines TABLE_OF_CONTENTS
+end
+
+get '/' do
+  initialize_common_variables
   erb :home
+end
+
+get '/chapters/:chapter_number' do |chapter_number|
+  initialize_common_variables
+  @chapter_number = chapter_number
+  chapter_file = format CHAPTER_TEXT, chapter_number: @chapter_number
+  @paragraphs = File.readlines chapter_file, "\n\n"
+  erb :chapter
 end
