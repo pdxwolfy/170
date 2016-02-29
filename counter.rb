@@ -3,6 +3,7 @@ require 'socket'
 def parse_request(request_string)
   httpd_method, path_and_query, _ = request_string.split ' ', 3
   path, query_params = path_and_query.split '?', 2
+  query_params ||= ''
   params = Hash[query_params.split('&').map { |param| param.split '=' }]
   [httpd_method, path, params]
 end
@@ -31,8 +32,10 @@ loop do
   request_line = client.gets or next
 
   process_client(client, request_line) do |_, _, params|
-    number = (params[:number] || '0').to_i
+    number = params['number'].to_i
     client.puts '<h1>Counter</h1>'
     client.puts "<p>The current number is #{number}.</p>"
+    client.puts "<a href='?number=#{number + 1}'>Add 1</a>"
+    client.puts "<a href='?number=#{number - 1}'>Subtract 1</a>"
   end
 end
