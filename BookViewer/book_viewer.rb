@@ -2,10 +2,10 @@ require 'sinatra'
 require 'sinatra/reloader'
 require 'tilt/erubis'
 
-TOC = 'data/toc.txt'
+TABLE_OF_CONTENTS = 'data/toc.txt'
 
 get '/' do
   @title = 'The Adventures of Sherlock Holmes'
-  @toc = File.read TOC
+  @contents = File.read TABLE_OF_CONTENTS
   erb :home
 end
