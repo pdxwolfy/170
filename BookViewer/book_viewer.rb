@@ -6,19 +6,19 @@ TABLE_OF_CONTENTS = 'data/toc.txt'
 CHAPTER_TEXT = 'data/chp%{chapter_number}.txt'
 
 def initialize_common_variables
-  @title = 'The Adventures of Sherlock Holmes'
   @contents = File.readlines TABLE_OF_CONTENTS
 end
 
 get '/' do
   initialize_common_variables
+  @title = 'The Adventures of Sherlock Holmes'
   erb :home
 end
 
 get '/chapters/:chapter_number' do |chapter_number|
   initialize_common_variables
-  @chapter_number = chapter_number
-  chapter_file = format CHAPTER_TEXT, chapter_number: @chapter_number
+  @title = "Chapter #{chapter_number}"
+  chapter_file = format CHAPTER_TEXT, chapter_number: chapter_number
   @paragraphs = File.readlines chapter_file, "\n\n"
   erb :chapter
 end
