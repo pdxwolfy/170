@@ -23,7 +23,7 @@
               <a class="pure-menu-heading" href="/">Table of Contents</a>
 
               <ul class="pure-menu-list">
-                <% @contents.map do |chapter| %>
+                <% @contents.each do |chapter| %>
                   <li class="pure-menu-item">
                     <a href="#" class="pure-menu-link"><%= chapter %></a>
                   </li>
@@ -43,7 +43,7 @@
 
           <div class="pure-menu">
             <ul class="pure-menu-list">
-              <% @contents.map do |chapter| %>
+              <% @contents.each do |chapter| %>
                 <li class="pure-menu-item">
                   <a href="#" class="pure-menu-link"><%= chapter %></a>
                 </li>
