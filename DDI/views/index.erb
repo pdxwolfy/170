@@ -18,13 +18,6 @@
 
       <div class="content">
         <h3 class="content-subhead">Select file to view</h3>
-        <div class="sequence-selector-wrapper">
-          <% if @sequence == 'descending' %>
-            <a href="/">Sort Ascending</a>
-          <% else %>
-            <a href="/?sequence=descending">Sort Descending</a>
-          <% end %>
-        </div>
 
         <div class="list-of-files-wrapper">
           <ul class="list-of-files">
@@ -38,7 +31,17 @@
           </ul>
         </div>
 
-      </div> <!-- .content -->
-    </div> <!-- #main -->
+        <div class="sequence-selector-wrapper">
+          <div class="sequence-selector-button">
+            <% if @sequence == 'descending' %>
+              <a href="/" class="sort">Sort Ascending</a>
+            <% else %>
+              <a href="/?sequence=descending" class="sort">Sort Descending</a>
+            <% end %>
+          </div>
+        </div>
+
+      </div><!-- .content -->
+    </div><!-- #main -->
   </body>
 </html>
