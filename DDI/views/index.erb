@@ -18,18 +18,27 @@
 
       <div class="content">
         <h3 class="content-subhead">Select file to view</h3>
+        <div class="sequence-selector-wrapper">
+          <% if @sequence == 'descending' %>
+            <a href="/">Sort Ascending</a>
+          <% else %>
+            <a href="/?sequence=descending">Sort Descending</a>
+          <% end %>
+        </div>
+
         <div class="list-of-files-wrapper">
           <ul class="list-of-files">
             <% @files.each do |file_name| %>
               <li class="file-item">
-                <a href="/files/<% file_name %>" class="file-link">
+                <a href="/<%= file_name %>" class="file-link">
                   <%= file_name %>
                 </a>
               </li>
             <% end %>
           </ul>
         </div>
-      </div>
-    </div>
+
+      </div> <!-- .content -->
+    </div> <!-- #main -->
   </body>
 </html>
