@@ -15,10 +15,14 @@ get '/' do
   erb :home
 end
 
-get '/chapters/:chapter_number' do |chapter_number|
+get '/chapter/:chapter_number' do |chapter_number|
   initialize_common_variables
-  @title = "Chapter #{chapter_number}"
+  @title = "Chapter #{chapter_number}: #{@contents[chapter_number.to_i - 1]}"
   chapter_file = format CHAPTER_TEXT, chapter_number: chapter_number
   @paragraphs = File.readlines chapter_file, "\n\n"
   erb :chapter
+end
+
+get '/show/:name' do
+  params[:name]
 end

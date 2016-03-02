@@ -47,9 +47,6 @@ a {
   background-color: lightgreen;
 }
 
-.file-link {
-
-}
 .sequence-selector-wrapper {
   text-align: center;
 }
@@ -64,8 +61,4 @@ a {
 
 .sequence-selector-button:hover {
   background-color: yellow;
-}
-
-.sort {
-  text-decoration: none;
 }
