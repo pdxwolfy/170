@@ -7,11 +7,6 @@ LIST_OF_NAMES = 'public/users.yaml'
 
 before do
   @info = Psych.load_file LIST_OF_NAMES
-  @total_users = @info.size
-  @total_interests = @info.reduce(0) do |accum, info|
-    $stderr.puts accum
-    accum + info.last[:interests].size
-  end
 end
 
 get '/' do
@@ -35,6 +30,16 @@ get '/user' do
 end
 
 helpers do
+  def count_interests
+    @total_interests = @info.reduce(0) do |accum, info|
+      accum + info.last[:interests].size
+    end
+  end
+
+  def count_users
+    @info.size
+  end
+
   def other_users
     @info.reject { |item| item.to_s == @name }.map(&:first)
   end
