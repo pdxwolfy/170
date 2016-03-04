@@ -1,26 +1,17 @@
+require 'psych'
 require 'sinatra'
 require 'sinatra/reloader'
 require 'tilt/erubis'
 
+LIST_OF_NAMES = 'public/users.yaml'
+
 get '/' do
-  @title = 'Dynamic Directory Index'
-  @directory_name = File.join Dir.pwd, 'public'
-  @sequence = params['sequence']
-
-  @files = select_files all_entries_in(@directory_name), @directory_name
-  @files.reverse! if @sequence == 'descending'
-
-  erb :index
+  redirect '/names'
 end
 
-def all_entries_in(directory_name)
-  Dir.entries(directory_name).sort do |name_a, name_b|
-    name_a.downcase <=> name_b.downcase
-  end
-end
+get '/names' do
+  @title = 'All Names'
+  @names = Psych.load_file LIST_OF_NAMES
 
-def select_files(directory_entries, directory_name)
-  directory_entries.select do |file_name|
-    File.file? File.join(directory_name, file_name)
-  end
+  erb :names
 end
