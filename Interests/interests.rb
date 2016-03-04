@@ -15,3 +15,9 @@ get '/names' do
 
   erb :names
 end
+
+get '/user' do
+  @name = params['name']
+
+  erb :user
+end

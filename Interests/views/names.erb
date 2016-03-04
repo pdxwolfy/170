@@ -19,7 +19,12 @@
         <div class="list-of-names-wrapper">
           <ul class="list-of-names">
             <% @names.each do |name| %>
-              <li class="name"><%= name[0] %></li>
+              <li class="name">
+                <a href="/user?name=<%= name[0] %>" class="link-to-user-page"
+                   id="user-<%= name[0] %>">
+                  <%= name[0] %>
+                </a>
+              </li>
             <% end %>
           </ul>
         </div>
