@@ -7,6 +7,11 @@ LIST_OF_NAMES = 'public/users.yaml'
 
 before do
   @info = Psych.load_file LIST_OF_NAMES
+  @total_users = @info.size
+  @total_interests = @info.inject(0) do |accum, info|
+    $stderr.puts accum
+    accum += info.last[:interests].size
+  end
 end
 
 get '/' do
