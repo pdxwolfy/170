@@ -18,11 +18,12 @@
       <div class="content">
         <div class="list-of-names-wrapper">
           <ul class="list-of-names">
-            <% @names.each do |name| %>
+            <% @info.each do |info| %>
+              <% name = info.first %>
               <li class="name">
-                <a href="/user?name=<%= name[0] %>" class="link-to-user-page"
-                   id="user-<%= name[0] %>">
-                  <%= name[0] %>
+                <a href="/user?name=<%= name %>" class="link-to-user-page"
+                   id="user-<%= name %>">
+                  <%= name %>
                 </a>
               </li>
             <% end %>
