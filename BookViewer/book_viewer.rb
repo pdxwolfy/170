@@ -1,5 +1,5 @@
 require 'sinatra'
-require 'sinatra/reloader'
+require 'sinatra/reloader' if development?
 require 'tilt/erubis'
 
 TABLE_OF_CONTENTS = 'data/toc.txt'

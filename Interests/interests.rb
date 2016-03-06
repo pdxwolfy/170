@@ -1,12 +1,12 @@
-require 'psych'
 require 'sinatra'
 require 'sinatra/reloader'
 require 'tilt/erubis'
+require 'yaml'
 
 LIST_OF_NAMES = 'public/users.yaml'
 
 before do
-  @info = Psych.load_file LIST_OF_NAMES
+  @info = YAML.load_file LIST_OF_NAMES
 end
 
 get '/' do
@@ -24,7 +24,7 @@ get '/user' do
   @title = "#{@name}'s Email and Interests"
   this_user = @info.find { |item| @name == item.first.to_s }
   @email = this_user.last[:email]
-  @interests = this_user.last[:interests]
+  @interests = this_user.last[:interests].sort
 
   erb :user
 end
@@ -41,7 +41,7 @@ helpers do
   end
 
   def other_users
-    @info.reject { |item| item.to_s == @name }.map(&:first)
+    @info.reject { |item| item.to_s == @name }.map(&:first).sort
   end
 
   def user_as_link(name)
