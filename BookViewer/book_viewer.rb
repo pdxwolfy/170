@@ -25,7 +25,7 @@ end
 
 def load_chapter(chapter_number)
   chapter_file = format CHAPTER_TEXT, chapter_number: chapter_number
-  File.read chapter_file, encoding: 'UTF-8'
+  File.read chapter_file#, encoding: 'UTF-8'
 end
 
 def search(contents, query)
