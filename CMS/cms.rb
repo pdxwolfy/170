@@ -62,7 +62,7 @@ module Route
   USERS_SIGNUP   = '/users/signup'
 
   # Route groupings
-  INDEX_AND_FILE = %r{(?:\A / \z) | (?:\A /file (?:/.*)? \z)}x
+  INDEX_AND_FILE = '(^ / $) | (^ /file (/.*)? $)'
 
   # These routes do not require a login
   safe = [INDEX, FILE_VIEW, USERS_SIGNIN, USERS_SIGNOUT, USERS_SIGNUP]
@@ -94,6 +94,18 @@ helpers do
 end
 
 before do
+  puts "before: #{self}"
+  class << self
+    puts "<<: #{self}"
+    def xyzzy
+      @x = 3
+      puts "xyzzy: #{self}"
+    end
+    @@xx = 5
+    puts "<<<<: #{self} #{@@xx}"
+  end
+  xyzzy
+
   @message = Messages.new self
   return if logged_in?
   return if Route::SAFE.include? request.path_info
@@ -295,6 +307,9 @@ end
 
 def authenticate? username, raw_password
   encrypted_password = auth_load[username] or return false
+  $stderr.puts encrypted_password.inspect
+  $stderr.puts raw_password.inspect
+  $stderr.puts BCrypt::Password.new(encrypted_password).inspect
   BCrypt::Password.new(encrypted_password) == raw_password
 end
 
