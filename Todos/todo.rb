@@ -12,7 +12,7 @@ LIST_DELETED = 'The list has been deleted.'
 LIST_NAME_SIZE_ERROR = 'The list name must be between 1 and 100 characters.'
 LIST_NAME_UNIQUE_ERROR = 'The list name must be unique.'
 LIST_UPDATED = 'The list has been been updated.'
-SECRET_KEY = 'Four score and seven years ag0 or so.'
+SECRET_KEY = 'Four' # score and seven years ag0 or so.'
 TODO_ALL_COMPLETED = 'All todo items are complete.'
 TODO_COMPLETED = 'The todo has been completed.'
 TODO_CREATED = 'The todo has been created.'
@@ -75,8 +75,8 @@ helpers do
   end
 end
 
-HAS_LIST_ID_AND_TODO_ID = %r{\A /lists /([^/]+) /todos /([^/]+) (?:/.*)? \Z}x
-HAS_LIST_ID_MAYBE       = %r{\A /lists /([^/]+) (?:/[^/]+)? \Z}x
+HAS_LIST_ID_AND_TODO_ID = %r{^ /lists /([^/]+) /todos /([^/]+) (?:/.*)? \Z}x
+HAS_LIST_ID_MAYBE       = %r{^ /lists /([^/]+) (?:/[^/]+)? \Z}x
 
 before do
   session[:lists] ||= []
@@ -112,12 +112,12 @@ get '/lists/new' do
 end
 
 # View a single list and let user create new todo items
-get %r{\A /lists/\d+ \Z}x do
+get %r{^ /lists/\d+ \Z}x do
   erb :list, layout: :layout
 end
 
 # Edit an existing todo list
-get %r{\A /lists/\d+/edit \Z}x do
+get %r{^ /lists/\d+/edit \Z}x do
   @list_name = @list[:name]
   erb :edit_list, layout: :layout
 end
@@ -138,7 +138,7 @@ post '/lists' do
 end
 
 # Update an existing todo list
-post %r{\A /lists/\d+ \Z}x do
+post %r{^ /lists/\d+ \Z}x do
   new_list_name = params[:list_name].strip
 
   error = (new_list_name == @list[:name]) || validate_list_name(new_list_name)
@@ -154,14 +154,14 @@ post %r{\A /lists/\d+ \Z}x do
 end
 
 # Mark all todo items complete on this list
-post %r{\A /lists/\d+/complete_all \Z}x do
+post %r{^ /lists/\d+/complete_all \Z}x do
   @todos.each { |todo| todo[:completed] = true }
   session[:success] = TODO_ALL_COMPLETED
   redirect "/lists/#{@list_id}"
 end
 
 # Delete an existing todo list
-post %r{\A /lists/\d+/destroy \Z}x do
+post %r{^ /lists/\d+/destroy \Z}x do
   session[:lists].delete_at(@list_id)
   return '/lists' if ajax?
 
@@ -170,7 +170,7 @@ post %r{\A /lists/\d+/destroy \Z}x do
 end
 
 # Create a new todo item.
-post %r{\A /lists/\d+/todos \Z}x do
+post %r{^ /lists/\d+/todos \Z}x do
   todo = params[:todo].strip
 
   error = validate_todo(todo)
@@ -186,14 +186,14 @@ post %r{\A /lists/\d+/todos \Z}x do
 end
 
 # Complete/reopen an existing todo item
-post %r{\A /lists/\d+/todos/\d+ \Z}x do
+post %r{^ /lists/\d+/todos/\d+ \Z}x do
   @todo[:completed] = (params[:completed] == 'true')
   session[:success] = @todo[:completed] ? TODO_COMPLETED : TODO_REOPENED
   redirect "/lists/#{@list_id}"
 end
 
 # Delete an existing todo item
-post %r{\A /lists/\d+/todos/\d+/destroy \Z}x do
+post %r{^ /lists/\d+/todos/\d+/destroy \Z}x do
   @todos.delete_at(@todo_id)
   no_response if ajax?
 

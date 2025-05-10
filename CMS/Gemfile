@@ -3,7 +3,7 @@
 
 source 'https://rubygems.org'
 
-ruby '2.4.2'
+ruby '2.5.3'
 
 gem 'addressable',     '~>2.4.0'
 gem 'bcrypt',          '~>3.1.11'
@@ -29,6 +29,7 @@ group :test do
   gem 'minitest',           '~>5.8.4'
   gem 'minitest-reporters', '~>1.1.8'
   gem 'nokogiri',           '~>1.6.7'
+  gem 'rack-test'
   gem 'simplecov',          '~>0.11.2', require: false
 end
 

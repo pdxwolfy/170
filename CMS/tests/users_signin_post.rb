@@ -119,6 +119,11 @@ describe File.basename(__FILE__).to_s do
         end
 
         it 'has an error message' do
+          puts session.inspect
+          puts session["session_id"].inspect
+          puts session["csrf"].inspect
+          puts session["tracking"].inspect
+          puts session["message"].inspect
           session.must_have_error :invalid_credentials
         end
 
